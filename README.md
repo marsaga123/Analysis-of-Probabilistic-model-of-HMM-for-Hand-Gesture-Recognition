@@ -1,7 +1,5 @@
 # Analysis-of-Probabilistic-model-of-HMM-for-Hand-Gesture-Recognition
 authors: K. Martin Sagayam, D. Jude Hemanth, T. Vedha Viyas
-affiliations : Department of ECE, Karunya University, Coimbatore, India.
-
 
 This work contains four stages: Image pre-processing, feature extraction, Classification - estimation (state sequence analysis), variational lower bound on model evidence, error rate calculation and performance measure by using confusion matrix.
 
