@@ -1,0 +1,195 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled0.ipynb",
+      "provenance": [],
+      "authorship_tag": "ABX9TyN6nbN3obJKfjjJAyQ//lUX",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/marsaga123/Analysis-of-Probabilistic-model-of-HMM-for-Hand-Gesture-Recognition/blob/master/exp1\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "q9wBhE-WLBaw"
+      },
+      "source": [
+        "basic commands"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "l3wP79aKLAFU",
+        "outputId": "b303c2a3-97d7-45f5-f72a-28b5cdf5d4ac"
+      },
+      "source": [
+        "x = 'Hi, my name is'\r\n",
+        "y = \" Martin Sagayam\"\r\n",
+        "z = x + y\r\n",
+        "print(5*z)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Hi, my name is Martin SagayamHi, my name is Martin SagayamHi, my name is Martin SagayamHi, my name is Martin SagayamHi, my name is Martin Sagayam\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "0Zo9fzf9NB2N"
+      },
+      "source": [
+        "Import command in python"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 349
+        },
+        "id": "SsUU1NJuNRyD",
+        "outputId": "deaa1a5c-523f-4dbd-abc4-24c601bd87bf"
+      },
+      "source": [
+        "import pandas as pd\r\n",
+        "import numpy as np\r\n",
+        "import scipy.stats as stats\r\n",
+        "import matplotlib.pyplot as plt\r\n",
+        "\r\n",
+        "x = np.linspace(0,20)\r\n",
+        "\r\n",
+        "y = np.exp(-x)\r\n",
+        "\r\n",
+        "plt.figure()\r\n",
+        "plt.stem(x,y)\r\n",
+        "plt.title(\"Exponential decaying function\")\r\n",
+        "plt.xlabel('time axis')\r\n",
+        "plt.ylabel('magnitude')\r\n",
+        "plt.grid(True)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "/usr/local/lib/python3.6/dist-packages/ipykernel_launcher.py:11: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the \"use_line_collection\" keyword argument to True.\n",
+            "  # This is added back by InteractiveShellApp.init_path()\n"
+          ],
+          "name": "stderr"
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "image/png": "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\n",
+            "text/plain": [
+              "<Figure size 432x288 with 1 Axes>"
+            ]
+          },
+          "metadata": {
+            "tags": [],
+            "needs_background": "light"
+          }
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "mpMvFEubRb5K"
+      },
+      "source": [
+        "meep library"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 649
+        },
+        "id": "5QYWR8-tReF2",
+        "outputId": "d028a2a8-2fde-4ab0-8b85-4471273f5612"
+      },
+      "source": [
+        "!wget -c https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh\r\n",
+        "!chmod +x Miniconda3-latest-Linux-x86_64.sh\r\n",
+        "!bash ./Miniconda3-latest-Linux-x86_64.sh -b -p /usr/local\r\n",
+        "!conda install -y -c chogan -c conda-forge pymeep\r\n",
+        "\r\n",
+        "import sys\r\n",
+        "sys.path.append('/usr/local/lib/python3.6/site-packages/')\r\n",
+        "import meep as mp"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "--2021-02-23 09:43:54--  https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh\n",
+            "Resolving repo.continuum.io (repo.continuum.io)... 104.18.200.79, 104.18.201.79, 2606:4700::6812:c84f, ...\n",
+            "Connecting to repo.continuum.io (repo.continuum.io)|104.18.200.79|:443... connected.\n",
+            "HTTP request sent, awaiting response... 301 Moved Permanently\n",
+            "Location: https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh [following]\n",
+            "--2021-02-23 09:43:54--  https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh\n",
+            "Resolving repo.anaconda.com (repo.anaconda.com)... 104.16.131.3, 104.16.130.3, 2606:4700::6810:8203, ...\n",
+            "Connecting to repo.anaconda.com (repo.anaconda.com)|104.16.131.3|:443... connected.\n",
+            "HTTP request sent, awaiting response... 200 OK\n",
+            "Length: 94235922 (90M) [application/x-sh]\n",
+            "Saving to: ‘Miniconda3-latest-Linux-x86_64.sh’\n",
+            "\n",
+            "Miniconda3-latest-L 100%[===================>]  89.87M   167MB/s    in 0.5s    \n",
+            "\n",
+            "2021-02-23 09:43:54 (167 MB/s) - ‘Miniconda3-latest-Linux-x86_64.sh’ saved [94235922/94235922]\n",
+            "\n",
+            "ERROR: File or directory already exists: '/usr/local'\n",
+            "If you want to update an existing installation, use the -u option.\n",
+            "/bin/bash: conda: command not found\n"
+          ],
+          "name": "stdout"
+        },
+        {
+          "output_type": "error",
+          "ename": "ModuleNotFoundError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mModuleNotFoundError\u001b[0m                       Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-18-65333f55cdb6>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      6\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0msys\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      7\u001b[0m \u001b[0msys\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mpath\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mappend\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'/usr/local/lib/python3.6/site-packages/'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 8\u001b[0;31m \u001b[0;32mimport\u001b[0m \u001b[0mmeep\u001b[0m \u001b[0;32mas\u001b[0m \u001b[0mmp\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;31mModuleNotFoundError\u001b[0m: No module named 'meep'",
+            "",
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0;32m\nNOTE: If your import is failing due to a missing package, you can\nmanually install dependencies using either !pip or !apt.\n\nTo view examples of installing some common dependencies, click the\n\"Open Examples\" button below.\n\u001b[0;31m---------------------------------------------------------------------------\u001b[0m\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
